@@ -6,8 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Uncomment basePath when deploying to GitHub Pages
-  // basePath: '/uxterms',
+  // GitHub Pages configuration
+  basePath: '/uxterms',
+  assetPrefix: '/uxterms',
 }
 
 module.exports = nextConfig
