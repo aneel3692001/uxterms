@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme */
+    --bg-base: #f9fafb;
+    --bg-elevated: #ffffff;
+    --bg-soft: #e5e7eb;
+    --bg-glass: rgba(255, 255, 255, 0.82);
+
+    --text-primary: #050507;
+    --text-muted: #4b5563;
+    --text-subtle: #6b7280;
+
+    --border-subtle: rgba(148, 163, 184, 0.35);
+    --border-strong: rgba(15, 23, 42, 0.85);
+
+    --brand-primary: #0020ee;
+    --brand-accent: #c2f449;
+  }
+
+  .dark {
+    /* Dark Theme */
+    --bg-base: #050507;
+    --bg-elevated: #050814;
+    --bg-glass: rgba(5, 8, 20, 0.75);
+
+    --text-primary: #f9fafb;
+    --text-muted: #9ca3af;
+    --text-subtle: #6b7280;
+
+    --border-subtle: rgba(148, 163, 184, 0.4);
+    --border-strong: rgba(229, 231, 235, 0.8);
+
+    --brand-primary: #0020ee;
+    --brand-accent: #c2f449;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(18px);
+  }
+
+  .dark .glass-panel {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 18px 60px rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(20px);
+  }
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
