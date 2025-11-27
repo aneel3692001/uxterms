@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:static": "next build -c next.config.static.js",
-    "build:docker": "next build -c next.config.docker.js",
+    "build:static": "next build",
+    "build:docker": "next build",
     "start": "next start",
     "lint": "next lint"
   },
