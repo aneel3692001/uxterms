@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/button";
 import { GlassCard } from "@/components/glass-card";
-import { ArrowRight, BookOpen, Trophy, Zap, Layers, Star, Users, CheckCircle } from "lucide-react";
+import { XPLevelWidget } from "@/components/xp-level-widget";
+import { ArrowRight, BookOpen, Trophy, Zap, Layers, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -25,8 +26,11 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-radial from-brand-blue/20 to-transparent opacity-50 pointer-events-none" />
+      <section className="relative pt-24 pb-32 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-primary/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-accent/10 rounded-full blur-[80px] pointer-events-none" />
+
         <div className="container mx-auto px-4 relative z-10">
           <motion.div 
             className="max-w-4xl mx-auto text-center space-y-8"
@@ -34,128 +38,102 @@ export default function Home() {
             animate="show"
             variants={container}
           >
-            <motion.div variants={item} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent border border-brand-accent/20 text-sm font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
-              </span>
-              v1.0 Public Beta
+            <motion.div variants={item} className="flex justify-center">
+               <XPLevelWidget level={1} xp={0} nextLevelXp={100} />
             </motion.div>
             
-            <motion.h1 variants={item} className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-text-primary to-text-muted pb-2">
-              Master UX Terminology <br />
-              <span className="text-brand-blue">& Design Principles</span>
+            <motion.h1 variants={item} className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+              Level up your <span className="text-gradient">UX, UI & Product</span> skills — the fun way
             </motion.h1>
             
             <motion.p variants={item} className="text-xl text-text-muted max-w-2xl mx-auto leading-relaxed">
-              The ultimate glossary and quiz platform for designers. 
-              Learn <span className="text-text-primary font-semibold">100+ terms</span>, 
-              test your skills with <span className="text-text-primary font-semibold">50+ questions</span>, 
-              and tackle <span className="text-text-primary font-semibold">30+ design challenges</span>.
+              UxTerms turns design theory into gamified quizzes, bite-sized challenges, and a clean A–Z glossary so you can learn faster without getting overwhelmed.
             </motion.p>
             
-            <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Link href="/glossary">
-                <Button size="lg" className="w-full sm:w-auto gap-2 text-lg h-14">
-                  Start Learning <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
+            <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
               <Link href="/quizzes">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14">
-                  Take a Quiz
+                <Button size="lg" className="w-full sm:w-auto gap-2 text-lg h-14 shadow-xl shadow-brand-primary/20">
+                  Start learning <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div variants={item} className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 border-t border-border/50 mt-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-brand-blue">100+</div>
-                <div className="text-sm text-text-muted">UX Terms</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-500">50+</div>
-                <div className="text-sm text-text-muted">Quiz Questions</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-brand-accent">30+</div>
-                <div className="text-sm text-text-muted">Challenges</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-pink-500">Free</div>
-                <div className="text-sm text-text-muted">Forever</div>
-              </div>
+              <Link href="/glossary">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 bg-bg-glass backdrop-blur-sm border-border-subtle hover:bg-bg-elevated">
+                  Browse glossary
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="py-20 bg-bg-soft/50">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Everything you need to level up</h2>
-            <p className="text-text-muted max-w-2xl mx-auto">
-              Whether you're a beginner or a senior designer, keep your skills sharp with our curated tools.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <Link href="/quizzes" className="group">
+              <GlassCard hoverEffect className="h-full p-8 flex flex-col gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="w-7 h-7" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-brand-primary transition-colors">Quizzes</h3>
+                  <p className="text-text-muted leading-relaxed">
+                    Test your knowledge across UX, UI, and Product with card-style quizzes. Earn XP and track your progress.
+                  </p>
+                </div>
+              </GlassCard>
+            </Link>
+
+            <Link href="/glossary" className="group">
+              <GlassCard hoverEffect className="h-full p-8 flex flex-col gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:scale-110 transition-transform duration-300">
+                  <BookOpen className="w-7 h-7" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-purple-500 transition-colors">A–Z UX Glossary</h3>
+                  <p className="text-text-muted leading-relaxed">
+                    Clear definitions, examples, and micro-challenges to grow your vocabulary. Never get lost in jargon again.
+                  </p>
+                </div>
+              </GlassCard>
+            </Link>
+
+            <Link href="/challenges" className="group">
+              <GlassCard hoverEffect className="h-full p-8 flex flex-col gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 flex items-center justify-center text-brand-accent group-hover:scale-110 transition-transform duration-300">
+                  <Trophy className="w-7 h-7 text-brand-accent-dark" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-brand-accent-dark transition-colors">Design Challenges</h3>
+                  <p className="text-text-muted leading-relaxed">
+                    Solve realistic tasks and practice your UX/UI/Product thinking. Build your portfolio one brief at a time.
+                  </p>
+                </div>
+              </GlassCard>
+            </Link>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link href="/glossary">
-              <GlassCard hoverEffect className="h-full flex flex-col gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-colors">
-                  <BookOpen className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Glossary</h3>
-                  <p className="text-text-muted text-sm">
-                    Master the terminology. A comprehensive A-Z guide of 100+ design terms and definitions.
-                  </p>
-                </div>
-              </GlassCard>
-            </Link>
+        </div>
+      </section>
 
-            <Link href="/quizzes">
-              <GlassCard hoverEffect className="h-full flex flex-col gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors">
-                  <Zap className="w-6 h-6" />
+      {/* Why UXTerms? */}
+      <section className="py-20 border-t border-border-subtle bg-bg-soft/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12">Why UXTerms?</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                "Fast, practical learning without fluff",
+                "Content curated by experienced product & UX designers",
+                "Clean, focused UI that respects your time and attention"
+              ].map((text, i) => (
+                <div key={i} className="flex flex-col items-center text-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-brand-primary/5 flex items-center justify-center text-brand-primary">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <p className="font-medium text-lg leading-snug">{text}</p>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Quizzes</h3>
-                  <p className="text-text-muted text-sm">
-                    Test your knowledge across UX, UI, and Product categories. Earn XP for every correct answer.
-                  </p>
-                </div>
-              </GlassCard>
-            </Link>
-
-            <Link href="/challenges">
-              <GlassCard hoverEffect className="h-full flex flex-col gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-black transition-colors">
-                  <Trophy className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Challenges</h3>
-                  <p className="text-text-muted text-sm">
-                    Practical design exercises to sharpen your skills. Randomly generated briefs for your portfolio.
-                  </p>
-                </div>
-              </GlassCard>
-            </Link>
-
-            <Link href="/resources">
-              <GlassCard hoverEffect className="h-full flex flex-col gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-500 group-hover:bg-pink-500 group-hover:text-white transition-colors">
-                  <Layers className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Resources</h3>
-                  <p className="text-text-muted text-sm">
-                    Curated tools, templates, and reading materials to level up your workflow.
-                  </p>
-                </div>
-              </GlassCard>
-            </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

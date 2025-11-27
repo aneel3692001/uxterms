@@ -1,6 +1,7 @@
 import { GlassCard } from "@/components/glass-card";
-import { ExternalLink, Download } from "lucide-react";
+import { ExternalLink, Download, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/button";
+import Link from "next/link";
 
 const resources = [
   {
@@ -31,43 +32,42 @@ const resources = [
 
 export default function ResourcesPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">Resources</h1>
-          <p className="text-text-muted text-lg">
+    <div className="container mx-auto px-4 py-12 min-h-screen">
+      <div className="max-w-5xl mx-auto space-y-8">
+        <div className="space-y-4 text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Resources</h1>
+          <p className="text-text-muted text-lg max-w-2xl">
             Curated tools and templates to supercharge your workflow.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {resources.map((resource, i) => (
-            <GlassCard key={i} hoverEffect className="flex flex-col justify-between">
-              <div className="space-y-4">
-                <span className="inline-block px-2 py-1 rounded text-xs font-medium bg-bg-soft text-text-muted">
-                  {resource.category}
-                </span>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">{resource.title}</h3>
-                  <p className="text-text-muted text-sm">{resource.description}</p>
+            <Link key={i} href={resource.link} target="_blank">
+              <GlassCard hoverEffect className="h-full flex flex-col justify-between p-6 group">
+                <div className="space-y-4">
+                  <div className="flex justify-between items-start">
+                    <span className="inline-block px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
+                      {resource.category}
+                    </span>
+                    <ArrowUpRight className="w-5 h-5 text-text-subtle group-hover:text-brand-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-brand-primary transition-colors">{resource.title}</h3>
+                    <p className="text-text-muted text-sm leading-relaxed">{resource.description}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="pt-6">
-                <Button variant="outline" className="w-full gap-2 group">
-                  Visit Website 
-                  <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </div>
-            </GlassCard>
+              </GlassCard>
+            </Link>
           ))}
           
           {/* Ad Placeholder */}
-          <GlassCard className="flex flex-col justify-center items-center text-center p-8 border-dashed border-2 border-brand-blue/20 bg-brand-blue/5">
-            <h3 className="font-bold text-brand-blue mb-2">Sponsor Slot</h3>
+          <GlassCard className="flex flex-col justify-center items-center text-center p-8 border-dashed border-2 border-border-subtle bg-bg-soft/50 hover:bg-bg-soft transition-colors cursor-pointer group">
+            <h3 className="font-bold text-text-primary mb-2">Sponsor Slot</h3>
             <p className="text-sm text-text-muted mb-4">
               Your tool could be featured here.
             </p>
-            <Button variant="ghost" size="sm">Contact Us</Button>
+            <Button variant="ghost" size="sm" className="group-hover:text-brand-primary">Contact Us</Button>
           </GlassCard>
         </div>
       </div>
