@@ -25,8 +25,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Copy Docker-specific config
+COPY next.config.docker.js next.config.js
+
 # Build Next.js application with standalone output
-RUN npm run build
+RUN npm run build:docker
 
 # ================================
 # Stage 3: Runner (Production)

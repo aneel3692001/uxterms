@@ -45,9 +45,81 @@ A modern, gamified learning platform for Product, UX, and UI Design. Built with 
 - `/src/hooks`: Custom hooks (useGamification)
 - `/src/styles`: Global styles and theme variables
 
-## Docker Deployment via GitHub Actions
+## 🚀 Deployment Options
 
-This project includes a fully automated CI/CD pipeline that builds and publishes Docker images to GitHub Container Registry (GHCR).
+UX Terms supports **two deployment strategies** with separate configurations:
+
+| Deployment Type | Config File | Output | Use Case |
+|----------------|-------------|--------|----------|
+| **GitHub Pages** | `next.config.static.js` | Static HTML | Free hosting, demos, reviews |
+| **Docker** | `next.config.docker.js` | Server-side | Production, VPS, scalable hosting |
+
+### Build Commands
+
+```bash
+npm run build          # Default build (static)
+npm run build:static   # Build for GitHub Pages
+npm run build:docker   # Build for Docker deployment
+```
+
+## 🌐 GitHub Pages Deployment (Static)
+
+Deploy UX Terms as a static site on GitHub Pages for **free hosting**.
+
+### Prerequisites
+
+1. Create a new repository on GitHub: `https://github.com/aneel3692001/uxterms`
+2. Push your code to the repository
+
+### Deployment Steps
+
+1. **Enable GitHub Pages**:
+   - Go to your repository on GitHub
+   - Click **Settings** → **Pages**
+   - Under **Source**, select **GitHub Actions**
+
+2. **Push your code**:
+
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/aneel3692001/uxterms.git
+   git push -u origin main
+   ```
+
+3. **Automatic Deployment**:
+   - The GitHub Action will automatically build and deploy your site
+   - Wait 2-3 minutes for the deployment to complete
+   - Your site will be live at: **`https://aneel3692001.github.io/uxterms/`**
+
+### Important Configuration
+
+The static build uses `next.config.static.js` which includes `basePath: '/uxterms'` by default.
+
+If you want a different base path or deploy to a custom domain:
+
+1. Edit `next.config.static.js`
+2. Change or remove the `basePath`
+3. Rebuild and push
+
+### View Deployment Status
+
+- Go to the **Actions** tab in your GitHub repository
+- You'll see the "Deploy to GitHub Pages" workflow running
+- Once complete, your site is live! 🎉
+
+## 🐳 Docker Deployment (Server-Side)
+
+This project includes a fully automated CI/CD pipeline for **server-side rendering** with Docker.
+
+### Key Differences from Static Build
+
+- Full Next.js server-side rendering (SSR)
+- Dynamic routes support
+- API routes available
+- Better performance for dynamic content
 
 ### How It Works
 
@@ -80,7 +152,7 @@ The included `docker-compose.yml` configures **Watchtower** to automatically pul
 
 Deploy UX Terms on any server with Docker installed.
 
-### Prerequisites
+### Server Prerequisites
 
 1. **Install Docker**:
 
@@ -95,7 +167,7 @@ Deploy UX Terms on any server with Docker installed.
    sudo apt-get install docker-compose-plugin
    ```
 
-### Deployment Steps
+### Server Deployment Steps
 
 1. **Clone the repository** (or just copy `docker-compose.yml`):
 

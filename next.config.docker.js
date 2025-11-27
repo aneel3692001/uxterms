@@ -2,12 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'export', // Default to static export
+  output: 'standalone', // Standalone for Docker deployment
   images: {
-    unoptimized: true,
+    domains: [],
   },
-  // Uncomment basePath when deploying to GitHub Pages
-  // basePath: '/uxterms',
 }
 
 module.exports = nextConfig
