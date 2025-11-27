@@ -1,9 +1,11 @@
 export interface QuizQuestion {
   id: string;
-  question: string;
-  options: string[];
-  correctIndex: number;
-  explanation: string;
+  category?: string; // Optional, can be useful for filtering if needed
+  questionVariants: string[];
+  correctAnswerVariants: string[];
+  distractorVariants: string[][]; // Array of arrays of strings
+  timer: number; // Seconds
+  explanation?: string; // Keeping this for educational value
 }
 
 export interface QuizCategory {
@@ -16,178 +18,220 @@ export interface QuizCategory {
 export const quizzes: QuizCategory[] = [
   {
     id: "ux-fundamentals",
-    title: "UX Fundamentals",
-    description: "Test your knowledge of core User Experience principles.",
+    title: "UX Foundations & Principles",
+    description: "Master the core principles of User Experience Design.",
     questions: [
       {
-        id: "q1",
-        question: "What does 'Affordance' refer to in design?",
-        options: [
-          "The cost of the product",
-          "Visual clues that indicate how an object should be used",
-          "The color contrast ratio",
-          "The speed of the application",
+        id: "ux-1",
+        category: "UX Foundations & Principles",
+        questionVariants: [
+          "A user repeatedly taps an icon that is not interactive. What UX principle is violated?",
+          "A user keeps trying to interact with a static symbol. Which principle is missing?",
+          "Users assume a decorative icon is a button. Which concept did the design fail to communicate?"
         ],
-        correctIndex: 1,
-        explanation: "Affordances are properties of an object that show users the actions they can take (e.g., a button looks pushable).",
+        correctAnswerVariants: [
+          "Poor affordance",
+          "The element lacks clear affordance cues",
+          "Affordance mismatch — the element looks tappable"
+        ],
+        distractorVariants: [
+          ["Color contrast issue", "Clarity of copy", "Incorrect typography emphasis"],
+          ["Usability heuristic misalignment", "Layout inconsistency", "Missing tooltip"],
+          ["Navigation structure problem", "Feedback delay", "Reversed hierarchy"]
+        ],
+        timer: 30,
+        explanation: "Affordance refers to the properties of an object that show users the actions they can take. If it looks clickable but isn't, it has false affordance."
       },
       {
-        id: "q2",
-        question: "Which of these is NOT one of Nielsen's 10 Usability Heuristics?",
-        options: [
+        id: "ux-2",
+        category: "Interaction Design",
+        questionVariants: [
+          "Users struggle to find 'Checkout'. What is the FIRST thing you examine?",
+          "Users can't locate the checkout action. What should you inspect first?",
+          "The checkout button is overlooked. What’s the first design element to check?"
+        ],
+        correctAnswerVariants: [
+          "Visual hierarchy around primary actions",
+          "Button prominence and visual priority",
+          "Hierarchy and placement of the primary CTA"
+        ],
+        distractorVariants: [
+          ["Color palette", "Icon size", "Scroll behavior"],
+          ["Branding consistency", "Microcopy tone", "Alignment details"],
+          ["Header structure", "Footer layout", "Field spacing"]
+        ],
+        timer: 30,
+        explanation: "Visual hierarchy guides the user's eye. Primary actions like 'Checkout' must be the most prominent element on the screen."
+      },
+      {
+        id: "ux-3",
+        category: "Information Architecture",
+        questionVariants: [
+          "Your navigation has 12 items. What's the best UX-first step?",
+          "A dense navigation overwhelms users. What’s your starting point?",
+          "Users get lost in a large menu. What’s the correct IA step?"
+        ],
+        correctAnswerVariants: [
+          "Card sorting with real users",
+          "Run an open card sort",
+          "User-driven grouping using card sorting"
+        ],
+        distractorVariants: [
+          ["Add icons", "Use shorter labels", "Add animations"],
+          ["Change brand color", "Make items bold", "Increase font size"],
+          ["Reorder randomly", "Use alphabetical sorting", "Split into 3 columns"]
+        ],
+        timer: 30,
+        explanation: "Card sorting helps you understand how users mentally categorize information, allowing you to structure navigation intuitively."
+      },
+      {
+        id: "ux-4",
+        category: "User Research",
+        questionVariants: [
+          "Users fail step 2 in onboarding. What’s the first research move?",
+          "Mid-onboarding drop-off is high. What should you investigate first?",
+          "Users stall at step 2. What’s the first UX research step?"
+        ],
+        correctAnswerVariants: [
+          "Observe users completing the flow",
+          "Conduct moderated usability testing",
+          "Watch users perform the task live"
+        ],
+        distractorVariants: [
+          ["Launch a survey", "Change button color", "Add tooltips"],
+          ["Rewrite copy immediately", "Remove step count", "Add animations"],
+          ["Increase padding", "Promote feature", "Add illustrations"]
+        ],
+        timer: 30,
+        explanation: "Observing users (usability testing) provides the 'why' behind the drop-off, which quantitative data (analytics) cannot reveal."
+      },
+      {
+        id: "ux-5",
+        category: "Accessibility",
+        questionVariants: [
+          "Text on a button is hard to read. What is the minimum WCAG AA contrast ratio required?",
+          "To ensure readability for visually impaired users, what contrast ratio must normal text meet?",
+          "Your body text is grey on white. What is the minimum contrast standard?"
+        ],
+        correctAnswerVariants: [
+          "4.5:1",
+          "At least 4.5:1 ratio",
+          "Minimum 4.5:1 contrast"
+        ],
+        distractorVariants: [
+          ["3:1", "2:1", "5:1"],
+          ["10:1", "7:1", "1:1"],
+          ["3.5:1", "6:1", "8:1"]
+        ],
+        timer: 25,
+        explanation: "WCAG Level AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text."
+      },
+      {
+        id: "ux-6",
+        category: "Usability Heuristics",
+        questionVariants: [
+          "A user uploads a file but sees no success message. Which heuristic is violated?",
+          "The screen doesn't change after clicking 'Save'. What is missing?",
+          "Users are unsure if the system is processing their request. Which principle applies?"
+        ],
+        correctAnswerVariants: [
           "Visibility of system status",
-          "Match between system and the real world",
-          "Pixel perfect consistency",
-          "Error prevention",
+          "System status visibility",
+          "Feedback on system state"
         ],
-        correctIndex: 2,
-        explanation: "While consistency is important, 'Pixel perfect consistency' is not one of the 10 heuristics. 'Consistency and standards' is the actual heuristic.",
+        distractorVariants: [
+          ["Match between system and real world", "User control and freedom", "Consistency and standards"],
+          ["Error prevention", "Recognition rather than recall", "Flexibility and efficiency"],
+          ["Aesthetic and minimalist design", "Help and documentation", "Error recovery"]
+        ],
+        timer: 25,
+        explanation: "Users should always be informed about what is going on, through appropriate feedback within a reasonable time."
       },
       {
-        id: "q4",
-        question: "What is cognitive load in UX design?",
-        options: [
-          "The number of pages in an app",
-          "The amount of mental effort required to use an interface",
-          "The file size of images",
-          "The number of designers on a team",
+        id: "ux-7",
+        category: "UX Laws",
+        questionVariants: [
+          "A button is too small and hard to click on mobile. Which law explains this difficulty?",
+          "Users take longer to hit a small target that is far away. Which law applies?",
+          "Which law relates movement time to target distance and size?"
         ],
-        correctIndex: 1,
-        explanation: "Cognitive load refers to the mental effort users must expend to understand and use an interface. Good UX minimizes unnecessary cognitive load.",
-      },
-      {
-        id: "q5",
-        question: "When conducting user research, what is a 'persona'?",
-        options: [
-          "A real user you interviewed",
-          "A fictional character representing a user segment",
-          "A design mockup",
-          "A privacy policy",
-        ],
-        correctIndex: 1,
-        explanation: "Personas are fictional characters based on research that represent different user types who might use your product in a similar way.",
-      },
-      {
-        id: "q6",
-        question: "What is the purpose of an A/B test?",
-        options: [
-          "To test two different products",
-          "To compare two versions of a design to see which performs better",
-          "To grade user feedback",
-          "To test accessibility",
-        ],
-        correctIndex: 1,
-        explanation: "A/B testing compares two variations (A and B) to determine which one performs better based on user behavior and predefined metrics.",
-      },
-      {
-        id: "q7",
-        question: "What does 'progressive disclosure' mean in UX?",
-        options: [
-          "Revealing features gradually to avoid overwhelming users",
-          "Slowly loading images",
-          "Increasing prices over time",
-          "Showing content from top to bottom",
-        ],
-        correctIndex: 0,
-        explanation: "Progressive disclosure is a design pattern that hides advanced or secondary information until it's needed, reducing initial complexity.",
-      },
-      {
-        id: "q8",
-        question: "What is 'card sorting' used for?",
-        options: [
-          "Organizing design files",
-          "Understanding how users categorize information",
-          "Sorting bug reports",
-          "Prioritizing features",
-        ],
-        correctIndex: 1,
-        explanation: "Card sorting is a UX research method where users organize topics into categories to help inform information architecture and navigation design.",
-      },
-      {
-        id: "q9",
-        question: "Which principle states that users spend most of their time on other sites?",
-        options: [
-          "Jakob's Law",
-          "Hick's Law",
+        correctAnswerVariants: [
           "Fitts's Law",
-          "Miller's Law",
+          "Fitts's Law of movement",
+          "Fitts's Law principle"
         ],
-        correctIndex: 0,
-        explanation: "Jakob's Law states that users prefer your site to work the same way as all the other sites they already know, so follow conventions.",
+        distractorVariants: [
+          ["Hick's Law", "Jakob's Law", "Miller's Law"],
+          ["Gestalt Law", "Law of Proximity", "Occam's Razor"],
+          ["Pareto Principle", "Weber's Law", "Tesler's Law"]
+        ],
+        timer: 25,
+        explanation: "Fitts's Law states that the time to acquire a target is a function of the distance to and size of the target."
       },
       {
-        id: "q10",
-        question: "What is a mental model in UX?",
-        options: [
-          "A 3D visualization",
-          "How users think something should work based on past experience",
-          "A wireframe template",
-          "The designer's workflow",
+        id: "ux-8",
+        category: "UX Laws",
+        questionVariants: [
+          "A menu has 50 items and users take forever to choose. Which law explains this?",
+          "Reducing options leads to faster decisions. Which law supports this?",
+          "Decision time increases with the number of choices. What is this called?"
         ],
-        correctIndex: 1,
-        explanation: "A mental model is a user's understanding of how something works, based on their previous experiences and expectations.",
+        correctAnswerVariants: [
+          "Hick's Law",
+          "Hick's Law of choice",
+          "Hick's Law principle"
+        ],
+        distractorVariants: [
+          ["Fitts's Law", "Jakob's Law", "Miller's Law"],
+          ["Parkinson's Law", "Murphy's Law", "Moore's Law"],
+          ["Law of Common Region", "Law of Similarity", "Law of Continuity"]
+        ],
+        timer: 25,
+        explanation: "Hick's Law describes the time it takes for a person to make a decision as a result of the possible choices: more choices = more time."
       },
       {
-        id: "q11",
-        question: "What is the F-pattern in web design?",
-        options: [
-          "A layout shaped like the letter F",
-          "A common eye-tracking pattern for reading web content",
-          "A font style",
-          "A feedback mechanism",
+        id: "ux-9",
+        category: "Psychology",
+        questionVariants: [
+          "Users expect the floppy disk icon to 'Save' because of past experience. What is this?",
+          "Designing based on how users think a system should work is leveraging what?",
+          "When a design matches a user's internal understanding, it aligns with their..."
         ],
-        correctIndex: 1,
-        explanation: "The F-pattern describes how users scan web pages: horizontally across the top, down the left side, and across again lower down.",
+        correctAnswerVariants: [
+          "Mental Model",
+          "User's Mental Model",
+          "Existing Mental Model"
+        ],
+        distractorVariants: [
+          ["Conceptual Model", "System Model", "Interaction Model"],
+          ["Cognitive Map", "User Flow", "Persona"],
+          ["Archetype", "Stereotype", "Prototype"]
+        ],
+        timer: 30,
+        explanation: "A mental model is an explanation of someone's thought process about how something works in the real world."
       },
       {
-        id: "q12",
-        question: "What does 'information architecture' refer to?",
-        options: [
-          "Building construction",
-          "The structural design of information environments",
-          "Data encryption methods",
-          "Server architecture",
+        id: "ux-10",
+        category: "Ethics",
+        questionVariants: [
+          "A subscription is easy to start but impossible to cancel. What is this called?",
+          "Design patterns that trick users into doing things they didn't mean to. What are these?",
+          "A 'roach motel' design where you check in but can't check out is an example of..."
         ],
-        correctIndex: 1,
-        explanation: "Information Architecture (IA) is the practice of organizing and labeling content to support usability and findability.",
-      },
-      {
-        id: "q13",
-        question: "What is a 'dark pattern' in UX?",
-        options: [
-          "A dark color scheme",
-          "A user interface designed to trick users",
-          "Night mode design",
-          "Shadow effects",
+        correctAnswerVariants: [
+          "Dark Pattern",
+          "Deceptive Design Pattern",
+          "Dark UX"
         ],
-        correctIndex: 1,
-        explanation: "Dark patterns are deceptive design techniques that trick users into doing things they didn't intend to do, like unintended purchases or subscriptions.",
-      },
-      {
-        id: "q14",
-        question: "What is the main goal of usability testing?",
-        options: [
-          "To prove your design is perfect",
-          "To observe real users and identify problems",
-          "To test server performance",
-          "To check code quality",
+        distractorVariants: [
+          ["Bad UX", "Poor Usability", "Anti-pattern"],
+          ["Gray Pattern", "Black Hat UX", "Evil Design"],
+          ["User Friction", "Conversion Optimization", "Growth Hacking"]
         ],
-        correctIndex: 1,
-        explanation: "Usability testing involves observing real users as they use your product to identify pain points, confusion, and areas for improvement.",
-      },
-      {
-        id: "q15",
-        question: "What does 'WCAG' stand for?",
-        options: [
-          "Web Content Accessibility Guidelines",
-          "Website Color And Graphics",
-          "World Conference on Graphic Arts",
-          "Web Coding Advanced Guidelines",
-        ],
-        correctIndex: 0,
-        explanation: "WCAG (Web Content Accessibility Guidelines) are international standards for making web content more accessible to people with disabilities.",
-      },
-    ],
+        timer: 25,
+        explanation: "Dark patterns are user interface design choices that benefit an online service by coercing, steering, or deceiving users into making unintended decisions."
+      }
+    ]
   },
   {
     id: "ui-design",
@@ -195,460 +239,432 @@ export const quizzes: QuizCategory[] = [
     description: "Challenge your eye for visual design and interface patterns.",
     questions: [
       {
-        id: "q3",
-        question: "What is the recommended minimum touch target size for mobile devices (according to Apple/Google)?",
-        options: ["24x24 pt", "32x32 pt", "44x44 pt / 48x48 dp", "60x60 pt"],
-        correctIndex: 2,
-        explanation: "Apple recommends 44x44pt, and Google Material Design recommends 48x48dp to ensure touch targets are accessible.",
-      },
-      {
-        id: "q16",
-        question: "What is the minimum WCAG AA contrast ratio for normal text?",
-        options: ["3:1", "4.5:1", "7:1", "10:1"],
-        correctIndex: 1,
-        explanation: "WCAG Level AA requires a contrast ratio of at least 4.5:1 for normal text to ensure readability for users with visual impairments.",
-      },
-      {
-        id: "q17",
-        question: "What does 'kerning' refer to in typography?",
-        options: [
-          "The space between lines",
-          "The space between individual character pairs",
-          "Font size",
-          "Font weight",
+        id: "ui-1",
+        category: "Visual Hierarchy",
+        questionVariants: [
+          "Which alignment improves scanability for text-heavy UIs?",
+          "Text-dense interfaces benefit most from which alignment?",
+          "For readability in dashboards, which alignment works best?"
         ],
-        correctIndex: 1,
-        explanation: "Kerning is the adjustment of space  between specific pairs of characters to achieve better visual balance.",
+        correctAnswerVariants: [
+          "Left-aligned text",
+          "Left alignment for optimal scanning",
+          "Left justification for predictable reading flow"
+        ],
+        distractorVariants: [
+          ["Centered text", "Right alignment", "Fully justified text"],
+          ["Equal spacing grid", "Icon-led layout", "Dense typography"],
+          ["High color contrast", "Extra bold fonts", "Perimeter navigation"]
+        ],
+        timer: 20,
+        explanation: "Left-aligned text is easier to read because the eye can easily find the start of the next line (in LTR languages)."
       },
       {
-        id: "q18",
-        question: "Which design principle suggests that objects close together are perceived as a group?",
-        options: [
-          "Law of Similarity",
+        id: "ui-2",
+        category: "Color Systems & Contrast",
+        questionVariants: [
+          "Which pairing ensures accessible body text?",
+          "Which color contrast meets WCAG AA for text?",
+          "Which text/background combo improves readability?"
+        ],
+        correctAnswerVariants: [
+          "Dark text on a light background with 4.5:1 contrast",
+          "High-contrast text above 4.5:1 ratio",
+          "Any pairing above 4.5:1 contrast ratio"
+        ],
+        distractorVariants: [
+          ["Pastel on pastel", "Light grey on white", "Neon on white"],
+          ["Low-contrast shades", "Saturated pairs", "Random palette"],
+          ["White on yellow", "Teal on aqua", "Grey on lavender"]
+        ],
+        timer: 20,
+        explanation: "High contrast between text and background is essential for readability. WCAG AA requires 4.5:1 for normal text."
+      },
+      {
+        id: "ui-3",
+        category: "Typography",
+        questionVariants: [
+          "Paragraph text feels cramped and hard to follow. What should you adjust?",
+          "Lines of text are touching each other. Which property needs increasing?",
+          "To improve vertical rhythm in a text block, what do you change?"
+        ],
+        correctAnswerVariants: [
+          "Line height (Leading)",
+          "Increase the leading",
+          "Adjust line-height property"
+        ],
+        distractorVariants: [
+          ["Kerning", "Tracking", "Font weight"],
+          ["Font size", "Letter spacing", "Text transform"],
+          ["Padding", "Margin", "Border width"]
+        ],
+        timer: 15,
+        explanation: "Line height (or leading) controls the vertical space between lines of text. Adequate line height improves readability."
+      },
+      {
+        id: "ui-4",
+        category: "Layout",
+        questionVariants: [
+          "Elements on the screen look scattered and disorganized. What tool fixes this?",
+          "To create structure and consistency in a layout, what should you use?",
+          "Which system helps align elements horizontally and vertically?"
+        ],
+        correctAnswerVariants: [
+          "Grid System",
+          "Layout Grid",
+          "12-Column Grid"
+        ],
+        distractorVariants: [
+          ["Color Wheel", "Typography Scale", "Icon Set"],
+          ["Gradient Mesh", "Drop Shadows", "Border Radius"],
+          ["Golden Ratio", "Rule of Thirds", "Fibonacci Sequence"]
+        ],
+        timer: 20,
+        explanation: "Grid systems provide a structure for placing elements, ensuring alignment, consistency, and visual order."
+      },
+      {
+        id: "ui-5",
+        category: "Mobile UI",
+        questionVariants: [
+          "Users keep missing the button on mobile. What is the likely cause?",
+          "A button is hard to tap on a phone. What is the minimum recommended size?",
+          "To prevent 'fat finger' errors, how large should a touch target be?"
+        ],
+        correctAnswerVariants: [
+          "At least 44x44pt (iOS) or 48x48dp (Android)",
+          "Minimum 44pt / 48dp",
+          "Large enough touch target (44pt+)"
+        ],
+        distractorVariants: [
+          ["24x24px", "10x10px", "32x32px"],
+          ["100x100px", "Full width", "12px height"],
+          ["Variable size", "Based on text length", "No minimum"]
+        ],
+        timer: 15,
+        explanation: "Small touch targets lead to errors. Guidelines recommend a minimum of 44pt (iOS) or 48dp (Android) for interactive elements."
+      },
+      {
+        id: "ui-6",
+        category: "Design Systems",
+        questionVariants: [
+          "Your app has 5 different styles of 'Submit' buttons. What is the solution?",
+          "Inconsistent UI components are causing confusion. What do you need?",
+          "To ensure all buttons look and behave the same, what should you implement?"
+        ],
+        correctAnswerVariants: [
+          "Standardized Component Library",
+          "Design System Components",
+          "Reusable Button Component"
+        ],
+        distractorVariants: [
+          ["More CSS", "Different colors", "Unique IDs"],
+          ["A/B Testing", "User Research", "Analytics"],
+          ["New Framework", "Refactoring code", "Ignoring it"]
+        ],
+        timer: 20,
+        explanation: "A component library within a design system ensures consistency by reusing the same coded and designed elements across the product."
+      },
+      {
+        id: "ui-7",
+        category: "Visual Design",
+        questionVariants: [
+          "A screen feels cluttered and overwhelming. What is missing?",
+          "Elements are too close together, creating tension. What should you add?",
+          "To give the eye a place to rest, what design element is crucial?"
+        ],
+        correctAnswerVariants: [
+          "Whitespace (Negative Space)",
+          "More padding and margins",
+          "Breathing room"
+        ],
+        distractorVariants: [
+          ["More colors", "Bold text", "Dividers"],
+          ["Icons", "Images", "Background patterns"],
+          ["Animations", "Modals", "Tooltips"]
+        ],
+        timer: 15,
+        explanation: "Whitespace (negative space) is a fundamental design element that helps organize content, improve readability, and create focus."
+      },
+      {
+        id: "ui-8",
+        category: "Gestalt Principles",
+        questionVariants: [
+          "Related items are scattered across the page. Which principle should you apply?",
+          "To show that elements belong together, you should place them close. Why?",
+          "Grouping related items through spacing utilizes which Gestalt law?"
+        ],
+        correctAnswerVariants: [
           "Law of Proximity",
-          "Law of Continuity",
-          "Law of Closure",
+          "Proximity Principle",
+          "Gestalt Proximity"
         ],
-        correctIndex: 1,
-        explanation: "The Law of Proximity is a Gestalt principle stating that objects near each other are perceived as related or part of a group.",
+        distractorVariants: [
+          ["Law of Closure", "Law of Similarity", "Law of Continuity"],
+          ["Law of Common Region", "Law of Symmetry", "Law of Figure-Ground"],
+          ["Fitts's Law", "Hick's Law", "Miller's Law"]
+        ],
+        timer: 20,
+        explanation: "The Law of Proximity states that objects that are near or 'proximate' to each other tend to be grouped together."
       },
       {
-        id: "q19",
-        question: "What is 'whitespace' (or negative space) in design?",
-        options: [
-          "Areas where text is written in white",
-          "Empty space between elements",
-          "Unused features",
-          "Blank pages",
+        id: "ui-9",
+        category: "Motion Design",
+        questionVariants: [
+          "An animation feels sluggish and makes the app seem slow. What is the issue?",
+          "A transition takes 1 second to complete. How does this affect UX?",
+          "For snappy UI feedback, what is the ideal animation duration range?"
         ],
-        correctIndex: 1,
-        explanation: "Whitespace is the empty space around elements in a design. It improves readability and helps create visual hierarchy.",
+        correctAnswerVariants: [
+          "Duration is too long (aim for 200-300ms)",
+          "It should be faster (200-300ms)",
+          "Reduce duration to ~300ms"
+        ],
+        distractorVariants: [
+          ["It needs more bounce", "Make it 2 seconds", "Remove it"],
+          ["Add more frames", "Use linear easing", "Loop it"],
+          ["Make it complex", "Add sound", "Change color"]
+        ],
+        timer: 15,
+        explanation: "UI animations should be quick (typically 200-500ms). Too slow, and they become an obstruction; too fast, and they are unnoticeable."
       },
       {
-        id: "q20",
-        question: "What is a grid system used for in UI design?",
-        options: [
-          "Creating graphs",
-          "Organizing content in a structured layout",
-          "Animation timing",
-          "Color selection",
+        id: "ui-10",
+        category: "Iconography",
+        questionVariants: [
+          "Users don't understand what a specific icon means. What is the best fix?",
+          "An ambiguous icon is causing errors. How do you clarify it?",
+          "To ensure an icon is universally understood, what should accompany it?"
         ],
-        correctIndex: 1,
-        explanation: "A grid system is a structure of columns and rows that helps designers align and organize content consistently across screens.",
-      },
-     {
-        id: "q21",
-        question: "What is the Golden Ratio approximately equal to?",
-        options: ["1.414", "1.618", "2.0", "3.14"],
-        correctIndex: 1,
-        explanation: "The Golden Ratio (φ) is approximately 1.618 and is often used in design for aesthetically pleasing proportions.",
-      },
-      {
-        id: "q22",
-        question: "What is 'skeuomorphism' in UI design?",
-        options: [
-          "Minimalist design",
-          "Design that mimics real-world objects",
-          "Dark mode design",
-          "Responsive design",
+        correctAnswerVariants: [
+          "Add a text label",
+          "Pair with a label",
+          "Visible text description"
         ],
-        correctIndex: 1,
-        explanation: "Skeuomorphism is a design approach where digital interfaces mimic the appearance of physical objects (e.g., a notes app that looks like a yellow legal pad).",
-      },
-      {
-        id: "q23",
-        question: "What does 'responsive design' mean?",
-        options: [
-          "Fast loading times",
-          "Design that adapts to different screen sizes",
-          "Interactive animations",
-          "Quick customer support",
+        distractorVariants: [
+          ["Make it bigger", "Change the color", "Animate it"],
+          ["Add a tooltip (hover only)", "Redesign the icon", "Remove it"],
+          ["Put it in a circle", "Add a shadow", "Make it 3D"]
         ],
-        correctIndex: 1,
-        explanation: "Responsive design is an approach where layouts and content adapt to different screen sizes and devices automatically.",
-      },
-      {
-        id: "q24",
-        question: "What is a 'CTA' in UI design?",
-        options: [
-          "Call To Action",
-          "Color Theory Application",
-          "Component Testing Architecture",
-          "Creative Text Animation",
-        ],
-        correctIndex: 0,
-        explanation: "CTA stands for Call To Action - a button or link designed to prompt users to take a specific action like 'Sign Up' or 'Buy Now'.",
-      },
-      {
-        id: "q25",
-        question: "What is 'visual hierarchy'?",
-        options: [
-          "The order of elements in code",
-          "Arranging elements to show importance",
-          "A team structure",
-          "Navigation menu levels",
-        ],
-        correctIndex: 1,
-        explanation: "Visual hierarchy is the arrangement of elements to show their order of importance, guiding users' eyes to the most important content first.",
-      },
-      {
-        id: "q26",
-        question: "What is the purpose of a style guide?",
-        options: [
-          "To write blog posts",
-          "To document design standards and patterns",
-          "To track bugs",
-          "To manage user feedback",
-        ],
-        correctIndex: 1,
-        explanation: "A style guide documents design standards including colors, typography, spacing, and component usage to ensure design consistency.",
-      },
-      {
-        id: "q27",
-        question: "What does 'flat design' emphasize?",
-        options: [
-          "3D effects and shadows",
-          "Simple, 2D elements without depth",
-          "Realistic textures",
-          "Complex gradients",
-        ],
-        correctIndex: 1,
-        explanation: "Flat design is a minimalist approach emphasizing simplicity, clean aesthetics, and the absence of 3D effects like shadows or gradients.",
-      },
-      {
-        id: "q28",
-        question: "What is 'glassmorphism'?",
-        options: [
-          "Glass manufacturing",
-          "A design trend with frosted-glass aesthetic",
-          "Transparent pricing",
-          "Crystal clear code",
-        ],
-        correctIndex: 1,
-        explanation: "Glassmorphism is a UI design trend featuring semi-transparent elements with blur effects, creating a frosted-glass appearance.",
-      },
-    ],
+        timer: 15,
+        explanation: "Icons can be ambiguous. The most effective way to ensure clarity is to pair the icon with a visible text label."
+      }
+    ]
   },
   {
-    id: "product",
-    title: "Product Management",
-    description: "Test your product strategy and management knowledge.",
+    id: "product-design",
+    title: "Product Design",
+    description: "Test your strategic design thinking and product problem-solving skills.",
     questions: [
       {
-        id: "q29",
-        question: "What does MVP stand for in product development?",
-        options: [
-          "Most Valuable Player",
-          "Minimum Viable Product",
-          "Maximum Value Proposition",
-          "Minimum Variable Process",
+        id: "pd-1",
+        category: "Product Thinking",
+        questionVariants: [
+          "Users abandon onboarding at step 2. What should a designer examine first?",
+          "Drop-off occurs at the second onboarding step. What’s your starting point?",
+          "Users fail early in onboarding. What’s the first Product Design move?"
         ],
-        correctIndex: 1,
-        explanation: "MVP (Minimum Viable Product) is a version with just enough features to satisfy early customers and provide feedback for future development.",
+        correctAnswerVariants: [
+          "Remove friction and unnecessary fields",
+          "Reduce cognitive load in that step",
+          "Simplify the step to reduce friction"
+        ],
+        distractorVariants: [
+          ["Add confetti", "Rebrand the screen", "Make CTA larger"],
+          ["Change typography", "Add new graphics", "Increase margin"],
+          ["Move the step later", "Play a tutorial video", "Add more text"]
+        ],
+        timer: 30,
+        explanation: "High drop-off suggests friction. The first step is to identify and remove barriers, such as unnecessary fields or complex decisions."
       },
       {
-        id: "q30",
-        question: "What is a 'North Star Metric'?",
-        options: [
-          "The highest number in analytics",
-          "The single metric that best captures core product value",
-          "Navigation direction",
-          "Star rating average",
+        id: "pd-2",
+        category: "Problem Framing",
+        questionVariants: [
+          "Before redesigning a feature, what’s the FIRST Product Design step?",
+          "A feature is underperforming. What should designers clarify first?",
+          "Low engagement in a feature. What’s the initial step?"
         ],
-        correctIndex: 1,
-        explanation: "The North Star Metric is the key measure that best reflects the value your product delivers to customers (e.g., 'Nights Booked' for Airbnb).",
+        correctAnswerVariants: [
+          "Frame the actual problem",
+          "Understand the problem behind the symptom",
+          "Clarify the design problem definition"
+        ],
+        distractorVariants: [
+          ["Change UI colors", "Add icons", "Increase padding"],
+          ["Launch marketing", "Add tutorial popups", "Increase notifications"],
+          ["Introduce animations", "Add 3D visuals", "Rearrange screen"]
+        ],
+        timer: 30,
+        explanation: "Design is problem-solving. You cannot solve a problem effectively if you haven't defined what the core problem actually is."
       },
       {
-        id: "q31",
-        question: "What is 'Jobs to Be Done' (JTBD) framework about?",
-        options: [
-          "Task management",
-          "Understanding the underlying task users want to accomplish",
-          "Job postings",
-          "Team productivity",
+        id: "pd-3",
+        category: "Metrics",
+        questionVariants: [
+          "Users sign up but never come back. Which metric is suffering?",
+          "High churn rate indicates a problem with what?",
+          "If your product fails to keep users long-term, what metric is low?"
         ],
-        correctIndex: 1,
-        explanation: "JTBD focuses on understanding the job or task a user is trying to accomplish, not just the features they want.",
+        correctAnswerVariants: [
+          "Retention Rate",
+          "User Retention",
+          "Retention"
+        ],
+        distractorVariants: [
+          ["Acquisition", "Activation", "Referral"],
+          ["Page Views", "Bounce Rate", "Session Duration"],
+          ["CAC", "NPS", "CSAT"]
+        ],
+        timer: 25,
+        explanation: "Retention measures the ability of a product to keep users over time. Low retention means the product isn't delivering sustained value."
       },
       {
-        id: "q32",
-        question: "What is a 'conversion funnel'?",
-        options: [
-          "A sales technique",
-          "The path users take from awareness to completing an action",
-          "A data storage method",
-          "A marketing budget",
+        id: "pd-4",
+        category: "Strategy",
+        questionVariants: [
+          "You have 100 feature ideas but can only build 3. What do you do?",
+          "How do you decide what to build next when resources are limited?",
+          "To create a roadmap, how do you handle a backlog of ideas?"
         ],
-        correctIndex: 1,
-        explanation: "A conversion funnel visualizes the user journey from initial awareness through to completing a desired action, showing drop-off rates at each stage.",
+        correctAnswerVariants: [
+          "Prioritize based on value vs effort",
+          "Use an Impact/Effort matrix",
+          "Prioritize high-impact, low-effort items"
+        ],
+        distractorVariants: [
+          ["Build the easiest ones", "Pick the CEO's favorites", "Random selection"],
+          ["Build the coolest ones", "Copy competitors", "Ask sales team"],
+          ["Alphabetical order", "First in, first out", "Build all of them"]
+        ],
+        timer: 30,
+        explanation: "Prioritization is key. Frameworks like Impact/Effort help identify features that deliver the most value for the least cost."
       },
       {
-        id: "q33",
-        question: "What does 'churn rate' measure?",
-        options: [
-          "How fast users scroll",
-          "The percentage of users who stop using a product",
-          "Loading speed",
-          "Content rotation",
+        id: "pd-5",
+        category: "MVP",
+        questionVariants: [
+          "You want to test a new product idea with minimal risk. What do you build?",
+          "To validate a concept quickly without wasting resources, what is the approach?",
+          "The first version of a product focused on learning is called..."
         ],
-        correctIndex: 1,
-        explanation: "Churn rate measures the percentage of customers who stop using your product over a given period - a key retention metric.",
+        correctAnswerVariants: [
+          "Minimum Viable Product (MVP)",
+          "An MVP",
+          "A learning-focused MVP"
+        ],
+        distractorVariants: [
+          ["Maximum Viable Product", "Final Polish", "Beta Release"],
+          ["Prototype only", "Mockup", "Wireframe"],
+          ["Full Scale Launch", "Feature Complete", "Gold Master"]
+        ],
+        timer: 25,
+        explanation: "An MVP is the smallest thing you can build that delivers customer value (and captures some of that value back) to validate your assumptions."
       },
       {
-        id: "q34",
-        question: "What is a 'feature flag'?",
-        options: [
-          "A decorative element",
-          "A technique to enable/disable features without deploying code",
-          "A report marker",
-          "A bookmark",
+        id: "pd-6",
+        category: "Hypothesis",
+        questionVariants: [
+          "Instead of saying 'Users want X', a product designer says...",
+          "How do you frame a design idea to be tested?",
+          "To avoid bias, design decisions should be framed as..."
         ],
-        correctIndex: 1,
-        explanation: "Feature flags allow you to turn features on or off in production without deploying new code, useful for A/B testing and gradual rollouts.",
+        correctAnswerVariants: [
+          "A Hypothesis",
+          "An assumption to be tested",
+          "We believe that [doing X] will result in [Y]"
+        ],
+        distractorVariants: [
+          ["A Fact", "A Requirement", "A Rule"],
+          ["A Guess", "A Hope", "A Dream"],
+          ["A Mandate", "A Law", "A Certainty"]
+        ],
+        timer: 25,
+        explanation: "Framing ideas as hypotheses ('We believe X will result in Y') acknowledges uncertainty and sets the stage for testing and validation."
       },
       {
-        id: "q35",
-        question: "What is 'retention rate'?",
-        options: [
-          "Memory capacity",
-          "The percentage of users who continue using a product",
-          "Storage space",
-          "Learning ability",
+        id: "pd-7",
+        category: "Stakeholders",
+        questionVariants: [
+          "The CEO wants a feature that users hate. What is your role?",
+          "Business goals conflict with user needs. How do you handle it?",
+          "When stakeholders push for bad UX, what should you do?"
         ],
-        correctIndex: 1,
-        explanation: "Retention rate measures the percentage of users who continue using your product over time - a critical product health metric.",
+        correctAnswerVariants: [
+          "Advocate for the user with data",
+          "Use research to show the risk",
+          "Balance business goals with user needs using evidence"
+        ],
+        distractorVariants: [
+          ["Do what the CEO says", "Ignore the CEO", "Quit"],
+          ["Complain", "Design it badly on purpose", "Hide the feature"],
+          ["Ask users to email the CEO", "Write a blog post", "Argue without data"]
+        ],
+        timer: 30,
+        explanation: "Designers are the voice of the user. Using data and research is the most effective way to align stakeholders and advocate for good UX."
       },
       {
-        id: "q36",
-        question: "What is a 'product roadmap'?",
-        options: [
-          "A map of product locations",
-          "A strategic plan outlining product vision and direction",
-          "Delivery routes",
-          "Office floor plan",
+        id: "pd-8",
+        category: "Discovery",
+        questionVariants: [
+          "You are asked to 'design a bridge'. What is the first question?",
+          "Before jumping into solutions for a new request, what must you ask?",
+          "To understand the root cause of a request, you ask..."
         ],
-        correctIndex: 1,
-        explanation: "A product roadmap is a strategic document that outlines the vision, direction, priorities, and progress of a product over time.",
+        correctAnswerVariants: [
+          "Why do we need a bridge? (The 'Why')",
+          "What problem are we solving?",
+          "What is the user's goal?"
+        ],
+        distractorVariants: [
+          ["What color should it be?", "How long?", "Wood or steel?"],
+          ["When is it due?", "What is the budget?", "Who is the PM?"],
+          ["Can I use Figma?", "Is it mobile first?", "Dark mode?"]
+        ],
+        timer: 25,
+        explanation: "Product design starts with 'Why'. Understanding the underlying need (maybe they just need to cross the river, a boat might work) is crucial."
       },
       {
-        id: "q37",
-        question: "What does DAU/MAU ratio measure?",
-        options: [
-          "Team size",
-          "User engagement (Daily vs Monthly Active Users)",
-          "Revenue growth",
-          "Server capacity",
+        id: "pd-9",
+        category: "Success Metrics",
+        questionVariants: [
+          "You launched a new feature. How do you know if it's successful?",
+          "To measure the impact of a design change, you need...",
+          "Success shouldn't be a feeling. It should be defined by..."
         ],
-        correctIndex: 1,
-        explanation: "DAU/MAU (Daily Active Users / Monthly Active Users) measures how sticky your product is - higher ratios indicate better engagement.",
+        correctAnswerVariants: [
+          "Pre-defined Success Metrics / KPIs",
+          "Measurable outcomes",
+          "Data against a baseline"
+        ],
+        distractorVariants: [
+          ["If the CEO likes it", "If it looks good", "If no one complains"],
+          ["Number of lines of code", "Hours spent", "Pixel perfection"],
+          ["Dribbble likes", "Awards", "Personal satisfaction"]
+        ],
+        timer: 25,
+        explanation: "Success must be defined before launch. Whether it's conversion rate, time on task, or retention, you need a metric to judge performance."
       },
       {
-        id: "q38",
-        question: "What is 'product-market fit'?",
-        options: [
-          "When product size matches packaging",
-          "When a product satisfies strong market demand",
-          "Manufacturing tolerance",
-          "Price matching",
+        id: "pd-10",
+        category: "Iteration",
+        questionVariants: [
+          "The product is launched. What is the designer's job now?",
+          "Design doesn't end at launch. What comes next?",
+          "To improve a product over time, you must..."
         ],
-        correctIndex: 1,
-        explanation: "Product-market fit occurs when your product satisfies a strong market demand - users love your product and tell others about it.",
-      },
-    ],
-  },
-  {
-    id: "mixed-practice",
-    title: "Mixed Practice",
-    description: "A mix of UX, UI, and Product questions to test your overall knowledge.",
-    questions: [
-      {
-        id: "q39",
-        question: "Your e-commerce checkout has a 70% abandonment rate. What should you investigate first?",
-        options: [
-          "Add more payment options",
-          "Reduce the number of form fields and steps",
-          "Change the button color",
-          "Add more product images",
+        correctAnswerVariants: [
+          "Measure, Learn, and Iterate",
+          "Analyze performance and improve",
+          "Continuous Iteration"
         ],
-        correctIndex: 1,
-        explanation: "High checkout abandonment often correlates with friction - too many steps or required fields. Simplifying the process typically has the biggest impact.",
-      },
-      {
-        id: "q40",
-        question: "Users complain your mobile app is hard to use. What research method would be most effective?",
-        options: [
-          "Send a survey",
-          "Conduct usability testing sessions",
-          "Read app reviews",
-          "Check analytics",
+        distractorVariants: [
+          ["Move to the next project immediately", "Celebrate and forget", "Nothing"],
+          ["Defend the design", "Blame users", "Write documentation"],
+          ["Archive files", "Delete Figma", "Sleep"]
         ],
-        correctIndex: 1,
-        explanation: "Usability testing lets you observe real users struggling with your app, providing direct insights into specific problems and their causes.",
-      },
-      {
-        id: "q41",
-        question: "What is the best approach to test if a new feature will increase conversions?",
-        options: [
-          "Launch it to everyone immediately",
-          "Run an A/B test with a control group",
-          "Ask stakeholders their opinion",
-          "Design multiple versions",
-        ],
-        correctIndex: 1,
-        explanation: "A/B testing lets you compare the new feature against the existing experience with real users, providing data-driven insights.",
-      },
-      {
-        id: "q42",
-        question: "What is 'banner blindness'?",
-        options: [
-          "Poor color contrast",
-          "Users ignoring banner-like content",
-          "Ad blocking software",
-          "Vision problems",
-        ],
-        correctIndex: 1,
-        explanation: "Banner blindness is the phenomenon where users consciously or unconsciously ignore banner-like information, especially ads.",
-      },
-      {
-        id: "q43",
-        question: "Which metric best indicates user engagement?",
-        options: [
-          "Page views",
-          "Time on site",
-          "Both time on site and return frequency",
-          "Number of clicks",
-        ],
-        correctIndex: 2,
-        explanation: "True engagement is best measured by combining metrics like time on site and how often users return - both indicate value.",
-      },
-      {
-        id: "q44",
-        question: "What is the main benefit of using a design system?",
-        options: [
-          "Faster design and development",
-          "Consistency across products",
-          "Both faster development and consistency",
-          "Prettier interfaces",
-        ],
-        correctIndex: 2,
-        explanation: "Design systems provide reusable components that speed up design/development while ensuring visual and behavioral consistency.",
-      },
-      {
-        id: "q45",
-        question: "When should you prioritize accessibility in design?",
-        options: [
-          "After launch",
-          "Only if legally required",
-          "From the beginning of the design process",
-          "Only for government projects",
-        ],
-        correctIndex: 2,
-        explanation: "Accessibility should be considered from the start - it's harder and more expensive to retrofit, and it benefits all users.",
-      },
-      {
-        id: "q46",
-        question: "What does 'mobile-first' design mean?",
-        options: [
-          "Only designing for mobile",
-          "Designing for mobile before scaling up to desktop",
-          "Mobile gets priority over desktop users",
-          "Launching mobile app first",
-        ],
-        correctIndex: 1,
-        explanation: "Mobile-first means designing the mobile experience first, then progressively enhancing for larger screens - ensures core functionality works on constrained screens.",
-      },
-      {
-        id: "q47",
-        question: "What is Hick's Law?",
-        options: [
-          "Users prefer simple designs",
-          "Decision time increases with number of choices",
-          "Users scan in an F-pattern",
-          "Bigger targets are easier to click",
-        ],
-        correctIndex: 1,
-        explanation: "Hick's Law states that the time to make a decision increases as the number and complexity of choices increase.",
-      },
-      {
-        id: "q48",
-        question: "What is the primary goal of user onboarding?",
-        options: [
-          "Show all features at once",
-          "Help users reach their first success quickly",
-          "Collect user data",
-          "Show off the design",
-        ],
-        correctIndex: 1,
-        explanation: "Effective onboarding helps users reach their 'aha moment' or first success as quickly as possible, demonstrating value.",
-      },
-      {
-        id: "q49",
-        question: "What is a 'microinteraction'?",
-        options: [
-          "Small font text",
-          "Brief, single-purpose moment of interaction with feedback",
-          "Micro-payments",
-          "Mobile gestures",
-        ],
-        correctIndex: 1,
-        explanation: "Microinteractions are small, focused moments that accomplish a single task and provide feedback, like a heart icon animating when clicked.",
-      },
-      {
-        id: "q50",
-        question: "What should you do if user research conflicts with stakeholder opinions?",
-        options: [
-          "Always follow stakeholders",
-          "Present the research data and advocate for users",
-          "Ignore the research",
-          "Design two versions",
-        ],
-        correctIndex: 1,
-        explanation: "As a designer, advocate for users by presenting research data clearly. Help stakeholders understand user needs while addressing business concerns.",
-      },
-      {
-        id: "q51",
-        question: "What is 'design debt'?",
-        options: [
-          "Money owed to designers",
-          "Accumulated design inconsistencies needing cleanup",
-          "Design loans",
-          "Time spent designing",
-        ],
-        correctIndex: 1,
-        explanation: "Design debt is the accumulation of quick fixes and inconsistencies that need to be addressed later, similar to technical debt.",
-      },
-      {
-        id: "q52",
-        question: "What is the purpose of a 'design sprint'?",
-        options: [
-          "Fast coding",
-          "Solve critical problems through rapid prototyping and testing",
-          "Quick meetings",
-          "Speed competitions",
-        ],
-        correctIndex: 1,
-        explanation: "Design sprints are a 5-day process for solving critical business questions through design, prototyping, and testing with real users.",
-      },
-    ],
-  },
+        timer: 25,
+        explanation: "Great products are built through iteration. Launch is just the beginning of learning how users actually use the product."
+      }
+    ]
+  }
 ];

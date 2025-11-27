@@ -1,17 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
+import { PWARegister } from "@/components/pwa-register";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "UX Terms - MVP",
-  description: "Gamified learning platform for Product, UX, and UI Design.",
+  title: "UxTerms | Master Product Design, UX & UI",
+  description: "The gamified learning platform for Product Design, UX, and UI Design. Master terminology, take quizzes, and complete challenges.",
   manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "UxTerms",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0020EE",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -31,6 +45,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <PWARegister />
         </ThemeProvider>
       </body>
     </html>

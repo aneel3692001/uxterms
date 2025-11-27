@@ -276,16 +276,16 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     id: "feature-flag",
     term: "Feature Flag",
-    definition: "A technique to enable or disable features in production without deploying code, useful for A/B testing.",
-    example: "Showing the new checkout flow to 10% of users while keeping the old flow for others.",
-    related: ["A/B Testing", "Continuous Deployment", "Product Management"],
+    definition: "A development technique that allows designers and developers to toggle features on or off, enabling safe testing of new designs in production.",
+    example: "Using a feature flag to show a new navigation design to only 10% of users for testing.",
+    related: ["A/B Testing", "Continuous Deployment", "Experimentation"],
   },
   {
     id: "feedback-loop",
     term: "Feedback Loop",
-    definition: "A system where outputs are routed back as inputs, creating continuous improvement cycles.",
+    definition: "A system where outputs are routed back as inputs, creating continuous improvement cycles in design.",
     example: "User feedback → Design changes → User testing → More feedback.",
-    related: ["Iteration", "Continuous Improvement", "Agile"],
+    related: ["Iteration", "Continuous Improvement", "Agile UX"],
   },
   {
     id: "fidelity",
@@ -465,9 +465,9 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     id: "key-performance-indicator",
     term: "Key Performance Indicator (KPI)",
-    definition: "Measurable values that demonstrate how effectively a company is achieving key business objectives.",
-    example: "Monthly active users (MAU), conversion rate, or customer lifetime value.",
-    related: ["Metrics", "Analytics", "OKR"],
+    definition: "Measurable values that demonstrate how effectively a design is achieving key business objectives.",
+    example: "Monitoring task completion rate or time-on-task as UX KPIs.",
+    related: ["Metrics", "Analytics", "UX Measurement"],
   },
   {
     id: "kiosk-mode",
@@ -535,9 +535,9 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     id: "minimum-viable-product",
     term: "Minimum Viable Product (MVP)",
-    definition: "A product with just enough features to satisfy early customers and provide feedback for future development.",
-    example: "Dropbox's initial MVP was a simple video demo before building the full product.",
-    related: ["Lean Startup", "Product Strategy", "Iteration"],
+    definition: "The version of a product with just enough features to be usable by early customers and provide feedback for future design iterations.",
+    example: "Designing only the core 'post' feature for a social app before adding likes or comments.",
+    related: ["Lean UX", "Product Strategy", "Iteration"],
   },
   {
     id: "mobile-first",
@@ -584,8 +584,8 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     id: "north-star-metric",
     term: "North Star Metric",
-    definition: "The single metric that best captures the core value a product delivers to customers.",
-    example: "For Airbnb, it's 'Nights Booked' - directly measuring value for both guests and hosts.",
+    definition: "The single metric that best captures the core value a product delivers to customers, guiding design strategy.",
+    example: "For Spotify, 'Time Spent Listening' aligns design decisions with user enjoyment.",
     related: ["KPI", "Product Strategy", "Metrics"],
   },
   {
@@ -638,6 +638,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     related: ["User Research", "Empathy Map", "Target Audience"],
   },
   {
+    id: "product-thinking",
+    term: "Product Thinking",
+    definition: "A mindset that focuses on the problem being solved for the user and the value proposition, rather than just features.",
+    example: "Asking 'Why do users need this?' before designing a new feature.",
+    related: ["Design Strategy", "UX Strategy", "Value Proposition"],
+  },
+  {
     id: "progressive-disclosure",
     term: "Progressive Disclosure",
     definition: "Revealing information gradually to avoid overwhelming users, showing only what's needed at each step.",
@@ -682,7 +689,7 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     id: "retention-rate",
     term: "Retention Rate",
-    definition: "The percentage of users who continue using a product over a given period.",
+    definition: "The percentage of users who continue using a product over a given period, often a sign of good UX.",
     example: "If 100 users sign up and 40 are still active after 30 days, retention is 40%.",
     related: ["Engagement", "Churn Rate", "Metrics"],
   },
