@@ -11,8 +11,8 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: "var(--brand-primary)",
-          lime: "var(--brand-accent)",
+          primary: "rgb(var(--brand-primary) / <alpha-value>)",
+          accent: "rgb(var(--brand-accent) / <alpha-value>)",
         },
         bg: {
           base: "var(--bg-base)",

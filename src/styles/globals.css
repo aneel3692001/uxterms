@@ -17,8 +17,8 @@
     --border-subtle: rgba(148, 163, 184, 0.2);
     --border-strong: rgba(15, 23, 42, 0.1);
 
-    --brand-primary: #0020ee;
-    --brand-accent: #c2f449;
+    --brand-primary: 0 32 238;
+    --brand-accent: 194 244 73;
   }
 
   .dark {
@@ -34,8 +34,8 @@
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-strong: rgba(255, 255, 255, 0.15);
 
-    --brand-primary: #3b5bff; /* Slightly lighter for dark mode visibility */
-    --brand-accent: #c2f449;
+    --brand-primary: 59 91 255; /* Slightly lighter for dark mode visibility */
+    --brand-accent: 194 244 73;
   }
 }
 
