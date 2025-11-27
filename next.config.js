@@ -10,7 +10,6 @@ const nextConfig = {
   },
   // GitHub Pages configuration
   basePath: isProd ? '/uxterms' : undefined,
-  assetPrefix: isProd ? '/uxterms' : undefined,
 }
 
 module.exports = nextConfig
