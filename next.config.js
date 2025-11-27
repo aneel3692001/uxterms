@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -7,8 +9,8 @@ const nextConfig = {
     unoptimized: true,
   },
   // GitHub Pages configuration
-  basePath: '/uxterms',
-  assetPrefix: '/uxterms',
+  basePath: isProd ? '/uxterms' : undefined,
+  assetPrefix: isProd ? '/uxterms' : undefined,
 }
 
 module.exports = nextConfig
