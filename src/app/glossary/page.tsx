@@ -57,7 +57,7 @@ export default function GlossaryPage() {
                 <h2 className="text-2xl font-bold text-brand-blue border-b border-border-subtle pb-2">
                   {letter}
                 </h2>
-                <div className="grid gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {groupedTerms[letter].map((term) => (
                     <GlassCard key={term.id} className="space-y-2">
                       <h3 className="text-xl font-bold">{term.term}</h3>
