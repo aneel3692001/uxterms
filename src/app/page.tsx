@@ -48,19 +48,23 @@ export default function Home() {
         transition: { duration: 1.5, ease: "easeOut" }
       };
 
+  const heroPrimaryButtonClass = `w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-brand-primary hover:bg-brand-primary/90 text-white border border-white/10 shadow-[0_0_30px_-5px_rgba(var(--brand-primary)/0.4)] hover:shadow-[0_0_40px_-5px_rgba(var(--brand-primary)/0.6)] ${shouldReduceMotion ? "transition-none" : "transition-all duration-300 hover:scale-105"}`;
+
+  const heroSecondaryButtonClass = `w-full sm:w-auto h-14 px-8 text-lg rounded-full border-border-strong backdrop-blur-md ${shouldReduceMotion ? "transition-none" : "transition-all duration-300 hover:bg-bg-elevated/50 hover:border-brand-primary/30"}`;
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/* Hero Section */}
       <section className="relative pt-32 pb-40 overflow-hidden">
         {/* Background Elements - Nebula/Aura Inspired */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden pointer-events-none">
-            {/* Deep Cosmic Base Gradient */}
-            <div
-              className={`absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[120px] mix-blend-screen ${shouldReduceMotion ? "animate-none" : "animate-pulse"}`}
-              style={{ animationDuration: "8s" }}
-            />
-            <div className="absolute top-[10%] right-[-10%] w-[600px] h-[600px] bg-brand-lime/5 rounded-full blur-[100px] mix-blend-screen" />
-            <div className="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[80px]" />
+          {/* Deep Cosmic Base Gradient */}
+          <div
+            className={`absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[120px] mix-blend-screen ${shouldReduceMotion ? "animate-none" : "animate-pulse"}`}
+            style={{ animationDuration: "8s" }}
+          />
+          <div className="absolute top-[10%] right-[-10%] w-[600px] h-[600px] bg-brand-lime/5 rounded-full blur-[100px] mix-blend-screen" />
+          <div className="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[80px]" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -91,12 +95,12 @@ export default function Home() {
 
             <motion.div variants={shouldReduceMotion ? undefined : item} style={heroItemStyle} className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/quizzes">
-                <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-brand-primary hover:bg-brand-primary/90 text-white shadow-[0_0_30px_-5px_rgba(var(--brand-primary)/0.4)] hover:shadow-[0_0_40px_-5px_rgba(var(--brand-primary)/0.6)] border border-white/10 transition-all duration-300 hover:scale-105">
+                <Button size="lg" className={heroPrimaryButtonClass}>
                   Start Learning <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link href="/glossary">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full border-border-strong hover:bg-bg-elevated/50 hover:border-brand-primary/30 backdrop-blur-md transition-all duration-300">
+                <Button variant="outline" size="lg" className={heroSecondaryButtonClass}>
                   Explore Glossary
                 </Button>
               </Link>
@@ -112,8 +116,8 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
             {...featureGridMotion}
           >
-            <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect variant="elevated">
-              <div className="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_-5px_rgba(var(--brand-primary)/0.2)]">
+            <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect={!shouldReduceMotion} variant="elevated">
+              <div className={`w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary shadow-[0_0_20px_-5px_rgba(var(--brand-primary)/0.2)] ${shouldReduceMotion ? "transition-none" : "group-hover:scale-110 transition-transform duration-300"}`}>
                 <BookOpen className="w-7 h-7" />
               </div>
               <div className="space-y-3">
@@ -124,8 +128,8 @@ export default function Home() {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect variant="elevated">
-              <div className="w-14 h-14 rounded-2xl bg-brand-lime/10 flex items-center justify-center text-brand-lime-dark group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_-5px_rgba(var(--brand-lime)/0.2)]">
+            <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect={!shouldReduceMotion} variant="elevated">
+              <div className={`w-14 h-14 rounded-2xl bg-brand-lime/10 flex items-center justify-center text-brand-lime-dark shadow-[0_0_20px_-5px_rgba(var(--brand-lime)/0.2)] ${shouldReduceMotion ? "transition-none" : "group-hover:scale-110 transition-transform duration-300"}`}>
                 <BrainCircuit className="w-7 h-7 text-brand-accent" />
               </div>
               <div className="space-y-3">
@@ -136,8 +140,8 @@ export default function Home() {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect variant="elevated">
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_-5px_rgba(168,85,247,0.2)]">
+            <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect={!shouldReduceMotion} variant="elevated">
+              <div className={`w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-500 shadow-[0_0_20px_-5px_rgba(168,85,247,0.2)] ${shouldReduceMotion ? "transition-none" : "group-hover:scale-110 transition-transform duration-300"}`}>
                 <Trophy className="w-7 h-7" />
               </div>
               <div className="space-y-3">
@@ -185,10 +189,10 @@ export default function Home() {
             </div>
             
             <div className="lg:w-1/2 w-full">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-brand-primary/20 to-brand-accent/20 rounded-[2rem] blur-2xl opacity-50 animate-pulse" />
-                <GlassCard className="relative p-8 md:p-12 border-border-subtle/50 bg-bg-glass/80 backdrop-blur-xl" variant="elevated">
-                  <div className="space-y-8">
+                <div className="relative">
+                  <div className={`absolute -inset-4 bg-gradient-to-r from-brand-primary/20 to-brand-accent/20 rounded-[2rem] blur-2xl opacity-50 ${shouldReduceMotion ? "" : "animate-pulse"}`} />
+                  <GlassCard className="relative p-8 md:p-12 border-border-subtle/50 bg-bg-glass/80 backdrop-blur-xl" variant="elevated">
+                    <div className="space-y-8">
                     <div className="flex items-center justify-between border-b border-border-subtle pb-6">
                       <div>
                         <p className="text-sm font-medium text-text-muted uppercase tracking-wider">Current Status</p>

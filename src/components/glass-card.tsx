@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion, HTMLMotionProps, useReducedMotion } from "framer-motion";
 
 interface GlassCardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -17,19 +17,24 @@ export function GlassCard({
   variant = "default",
   ...props
 }: GlassCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  const animationProps = shouldReduceMotion
+    ? { initial: false, animate: false, transition: undefined, style: { opacity: 1, transform: "none" } }
+    : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.4, ease: "easeOut" } };
+
   return (
     <motion.div
       className={cn(
-        "rounded-3xl transition-all duration-300",
+        "rounded-3xl",
+        shouldReduceMotion ? "transition-none" : "transition-all duration-300",
         variant === "default" && "glass-panel",
         variant === "elevated" && "glass-panel-elevated",
         variant === "flat" && "bg-bg-glass/30 border border-border-subtle",
-        hoverEffect && "glass-card-hover cursor-pointer",
+        hoverEffect && !shouldReduceMotion && "glass-card-hover cursor-pointer",
         className
       )}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      {...animationProps}
       {...props}
     >
       {children}
