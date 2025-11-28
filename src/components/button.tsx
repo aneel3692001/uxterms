@@ -18,7 +18,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-bg-soft text-text-primary",
         link: "text-brand-primary underline-offset-4 hover:underline",
         glass: "glass-panel hover:bg-white/10 text-text-primary border-border-subtle hover:border-brand-primary/30",
-        nebula: "bg-gradient-to-r from-brand-primary to-indigo-600 text-white shadow-lg shadow-brand-primary/30 hover:shadow-brand-primary/50 border border-white/10",
+        nebula: "bg-gradient-to-r from-brand-primary to-brand-xp text-white shadow-lg shadow-brand-primary/30 hover:shadow-brand-primary/50 border border-white/10",
       },
       size: {
         default: "h-10 px-4 py-2",

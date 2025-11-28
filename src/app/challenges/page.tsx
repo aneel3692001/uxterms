@@ -4,7 +4,7 @@ import { useState } from "react";
 import { challenges } from "@/data/challenges";
 import { GlassCard } from "@/components/glass-card";
 import { Button } from "@/components/button";
-import { Shuffle, Trophy, CheckCircle, Tag, Lightbulb, ArrowRight, Target, Sparkles, Clock, AlertCircle } from "lucide-react";
+import { Shuffle, Trophy, CheckCircle, Tag, Lightbulb, Target, Sparkles, Clock, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { generateChallenge, GeneratedChallenge } from "@/lib/challenge-generator";
@@ -38,14 +38,15 @@ export default function ChallengesPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-24 min-h-screen">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <div className="container-custom py-24 min-h-screen">
+      <div className="max-w-7xl mx-auto space-y-12">
+        {/* Header */}
         <div className="space-y-6 text-center md:text-left relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-500 text-xs font-bold uppercase tracking-widest border border-purple-500/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest border border-brand-primary/20">
             <Target className="w-3 h-3" /> Practice Mode
           </div>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.1]">
-            Design <span className="nebula-text-gradient">Challenges</span>
+          <h1 className="font-display">
+            Design <span className="warm-gradient-text">Challenges</span>
           </h1>
           <p className="text-text-muted text-xl max-w-2xl leading-relaxed">
             Sharpen your skills with practical briefs. Build your portfolio one challenge at a time.
@@ -53,11 +54,11 @@ export default function ChallengesPage() {
         </div>
 
         {/* Generator Controls */}
-        <GlassCard className="p-6 md:p-8 border-brand-primary/20 bg-brand-primary/5">
+        <GlassCard className="p-6 md:p-8 border-brand-primary/20 bg-bg-surface" variant="elevated">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center md:text-left">
-              <h3 className="text-xl font-bold flex items-center justify-center md:justify-start gap-2">
-                <Sparkles className="w-5 h-5 text-brand-accent" />
+              <h3 className="text-xl font-bold flex items-center justify-center md:justify-start gap-2 font-display">
+                <Sparkles className="w-5 h-5 text-brand-primary" />
                 AI Challenge Generator
               </h3>
               <p className="text-text-muted text-sm">Generate infinite, unique design briefs tailored to your needs.</p>
@@ -67,7 +68,7 @@ export default function ChallengesPage() {
               <select 
                 value={genCategory}
                 onChange={(e) => setGenCategory(e.target.value as any)}
-                className="h-10 px-4 rounded-lg bg-bg-elevated border border-border-subtle text-sm font-medium focus:ring-2 focus:ring-brand-primary/50 outline-none"
+                className="h-10 px-4 rounded-lg bg-bg-base border border-border-strong text-sm font-medium focus:ring-2 focus:ring-brand-primary/50 outline-none text-text-primary"
               >
                 <option value="UX Design">UX Design</option>
                 <option value="UI Design">UI Design</option>
@@ -77,7 +78,7 @@ export default function ChallengesPage() {
               <select 
                 value={genDifficulty}
                 onChange={(e) => setGenDifficulty(e.target.value as any)}
-                className="h-10 px-4 rounded-lg bg-bg-elevated border border-border-subtle text-sm font-medium focus:ring-2 focus:ring-brand-primary/50 outline-none"
+                className="h-10 px-4 rounded-lg bg-bg-base border border-border-strong text-sm font-medium focus:ring-2 focus:ring-brand-primary/50 outline-none text-text-primary"
               >
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
@@ -91,7 +92,7 @@ export default function ChallengesPage() {
           </div>
         </GlassCard>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Challenge Card */}
           <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
@@ -128,7 +129,7 @@ export default function ChallengesPage() {
                       </div>
 
                       <div className="space-y-6">
-                        <h2 className="text-3xl md:text-5xl font-black leading-[1.1] text-text-primary">{generatedChallenge.title}</h2>
+                        <h2 className="text-3xl md:text-5xl font-black leading-[1.1] text-text-primary font-display">{generatedChallenge.title}</h2>
                         <p className="text-xl md:text-2xl text-text-muted leading-relaxed font-medium">
                           {generatedChallenge.scenario}
                         </p>
@@ -155,7 +156,7 @@ export default function ChallengesPage() {
                           <ul className="space-y-3">
                             {generatedChallenge.considerations.map((c, i) => (
                               <li key={i} className="text-text-muted flex items-start gap-3 text-sm">
-                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-accent shrink-0" />
+                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
                                 {c}
                               </li>
                             ))}
@@ -200,7 +201,7 @@ export default function ChallengesPage() {
                       </div>
 
                       <div className="space-y-6">
-                        <h2 className="text-4xl md:text-6xl font-black leading-[1.1] text-text-primary">{activeChallenge.title}</h2>
+                        <h2 className="text-4xl md:text-6xl font-black leading-[1.1] text-text-primary font-display">{activeChallenge.title}</h2>
                         <p className="text-xl md:text-2xl text-text-muted leading-relaxed font-medium">
                           {activeChallenge.description}
                         </p>
@@ -215,7 +216,7 @@ export default function ChallengesPage() {
                           <ul className="space-y-4">
                             {activeChallenge.examplePrompts.map((prompt, i) => (
                               <li key={i} className="text-text-muted flex items-start gap-4 text-lg">
-                                <span className="mt-2.5 w-2 h-2 rounded-full bg-brand-accent shrink-0 shadow-[0_0_8px_rgba(var(--brand-accent)/0.5)]" />
+                                <span className="mt-2.5 w-2 h-2 rounded-full bg-brand-primary shrink-0 shadow-[0_0_8px_rgba(var(--brand-primary)/0.5)]" />
                                 {prompt}
                               </li>
                             ))}
@@ -259,11 +260,11 @@ export default function ChallengesPage() {
           </div>
 
           {/* List of Challenges */}
-          <div className="lg:col-span-4 space-y-6 flex flex-col h-[800px] sticky top-24">
-            <h3 className="font-bold text-xl px-2 flex items-center gap-3 text-text-primary">
+          <div className="lg:col-span-4 space-y-6 flex flex-col h-[calc(100vh-8rem)] sticky top-24">
+            <h3 className="font-bold text-xl px-2 flex items-center gap-3 text-text-primary font-display">
               All Challenges <span className="text-xs font-bold text-brand-primary bg-brand-primary/10 px-2.5 py-1 rounded-full border border-brand-primary/20">{challenges.length}</span>
             </h3>
-            <div className="space-y-4 overflow-y-auto pr-2 flex-1 scrollbar-thin pb-4 -mr-4 pr-4">
+            <div className="space-y-4 overflow-y-auto pr-2 flex-1 scrollbar-hide pb-4 -mr-4 pr-4">
               {challenges.map((challenge) => (
                 <GlassCard 
                   key={challenge.id} 
@@ -278,7 +279,7 @@ export default function ChallengesPage() {
                 >
                   <div className="flex justify-between items-start mb-3 gap-4">
                     <h4 className={cn(
-                      "font-bold text-base group-hover:text-brand-primary transition-colors line-clamp-2 leading-snug",
+                      "font-bold text-base group-hover:text-brand-primary transition-colors line-clamp-2 leading-snug font-display",
                       activeChallenge.id === challenge.id && !isGeneratorMode ? "text-brand-primary" : "text-text-primary"
                     )}>
                       {challenge.title}

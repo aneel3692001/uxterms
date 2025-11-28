@@ -5,14 +5,14 @@ import Link from "next/link";
 
 export default function QuizzesPage() {
   return (
-    <div className="container mx-auto px-4 py-24 min-h-screen">
+    <div className="container-custom py-24 min-h-screen">
       <div className="max-w-6xl mx-auto space-y-16">
         <div className="space-y-6 text-center md:text-left relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-lime/10 text-brand-lime-dark text-xs font-bold uppercase tracking-widest border border-brand-lime/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest border border-brand-primary/20">
             <Zap className="w-3 h-3" /> Skill Check
           </div>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.1]">
-            Interactive <span className="nebula-text-gradient">Quizzes</span>
+          <h1 className="font-display">
+            Interactive <span className="warm-gradient-text">Quizzes</span>
           </h1>
           <p className="text-text-muted text-xl max-w-2xl leading-relaxed">
             Test your knowledge and earn XP. Choose a category to begin your journey to mastery.
@@ -22,7 +22,11 @@ export default function QuizzesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {quizzes.map((category) => (
             <Link key={category.id} href={`/quizzes/${category.id}`} className="block h-full">
-              <GlassCard hoverEffect className="h-full flex flex-col justify-between group p-10 border-border-subtle hover:border-brand-primary/40 bg-bg-glass/50" variant="elevated">
+              <GlassCard 
+                hoverEffect 
+                className="h-full flex flex-col justify-between group p-10 border-border-subtle hover:border-brand-primary/40 bg-bg-glass/50" 
+                variant="elevated"
+              >
                 <div className="space-y-8">
                   <div className="w-20 h-20 rounded-3xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-500 shadow-2xl shadow-brand-primary/5 group-hover:shadow-brand-primary/30 group-hover:scale-110 group-hover:rotate-3">
                     {category.id === "ui-design" ? (
@@ -32,7 +36,7 @@ export default function QuizzesPage() {
                     )}
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold mb-4 group-hover:text-brand-primary transition-colors duration-300">{category.title}</h3>
+                    <h3 className="text-3xl font-bold mb-4 font-display group-hover:text-brand-primary transition-colors duration-300">{category.title}</h3>
                     <p className="text-text-muted text-lg leading-relaxed">
                       {category.description}
                     </p>

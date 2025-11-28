@@ -4,42 +4,42 @@
 
 @layer base {
   :root {
-    /* Light Theme - Clean, High Contrast, Editorial */
-    --bg-base: #ffffff;
-    --bg-elevated: #f4f4f5;
-    --bg-soft: #f4f4f5;
-    --bg-glass: rgba(255, 255, 255, 0.7);
+    /* Light Mode - Strict ColorHunt Palette */
+    --bg-base: #faf3e1;
+    --bg-elevated: #f5e7c6;
+    --bg-soft: #f5e7c6;
+    --bg-glass: rgba(245, 231, 198, 0.6);
 
-    --text-primary: #050507;
-    --text-muted: #52525b;
-    --text-subtle: #a1a1aa;
+    --text-primary: #222222;
+    --text-muted: rgba(34, 34, 34, 0.72);
+    --text-subtle: rgba(34, 34, 34, 0.5);
 
-    --border-subtle: rgba(5, 5, 7, 0.08);
-    --border-strong: rgba(5, 5, 7, 0.15);
+    --border-subtle: rgba(34, 34, 34, 0.12);
+    --border-strong: rgba(34, 34, 34, 0.2);
 
-    /* Brand Colors - RGB for Tailwind Opacity Support */
-    --brand-primary: 0 32 238; /* #0020EE */
-    --brand-accent: 0 0 0; /* Black accent for light mode for sharp contrast */
-    --brand-lime: 194 244 73; /* #C2F449 */
+    /* Brand Colors - RGB for Tailwind */
+    --brand-primary: 255 109 31; /* #FF6D1F */
+    --brand-accent: 255 109 31;
+    --brand-xp: 60 90 255; /* Blue for XP only */
   }
 
   .dark {
-    /* Dark Theme - Nebula/Aura: Deep Cosmic */
-    --bg-base: #050507;
-    --bg-elevated: #0a0a0c;
-    --bg-soft: #121215;
-    --bg-glass: rgba(5, 5, 7, 0.6);
+    /* Dark Mode - Strict ColorHunt Palette */
+    --bg-base: #222222;
+    --bg-elevated: #2a2a2a;
+    --bg-soft: #2f2f2f;
+    --bg-glass: rgba(42, 42, 42, 0.6);
 
-    --text-primary: #ffffff;
-    --text-muted: #a1a1aa;
-    --text-subtle: #52525b;
+    --text-primary: #faf3e1;
+    --text-muted: rgba(250, 243, 225, 0.65);
+    --text-subtle: rgba(250, 243, 225, 0.4);
 
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.15);
+    --border-subtle: rgba(250, 243, 225, 0.15);
+    --border-strong: rgba(250, 243, 225, 0.25);
 
-    --brand-primary: 60 90 255; /* Lighter Blue for Dark Mode readability */
-    --brand-accent: 194 244 73; /* #C2F449 Lime */
-    --brand-lime: 194 244 73;
+    --brand-primary: 255 109 31;
+    --brand-accent: 255 109 31;
+    --brand-xp: 60 90 255;
   }
 }
 
@@ -53,18 +53,14 @@
   }
 
   body {
-    @apply bg-bg-base text-text-primary antialiased selection:bg-brand-primary/30 selection:text-brand-primary;
+    @apply bg-bg-base text-text-primary antialiased selection:bg-brand-primary/20 selection:text-brand-primary;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    /* Subtle warm background glow */
     background-image: radial-gradient(
-        circle at 15% 0%,
-        rgba(var(--brand-primary), 0.08) 0%,
-        transparent 40%
-      ),
-      radial-gradient(
-        circle at 85% 0%,
-        rgba(var(--brand-lime), 0.05) 0%,
-        transparent 40%
-      );
+      circle at 20% 10%,
+      rgba(var(--brand-primary), 0.03) 0%,
+      transparent 50%
+    );
     background-attachment: fixed;
   }
 
@@ -78,17 +74,33 @@
     }
   }
 
+  /* Typography System */
   h1,
   h2,
-  h3,
+  h3 {
+    @apply font-display font-bold text-text-primary;
+  }
+
   h4,
   h5,
   h6 {
-    @apply tracking-tight font-bold text-text-primary;
+    @apply font-sans font-semibold text-text-primary;
   }
 
   h1 {
-    @apply text-4xl md:text-6xl leading-[1.1];
+    @apply text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl lg:text-3xl leading-[1.2] tracking-tight;
+  }
+
+  p {
+    @apply leading-relaxed;
   }
 
   a {
@@ -102,36 +114,53 @@
 }
 
 @layer utilities {
+  /* Glass Panel Utilities */
   .glass-panel {
-    @apply bg-bg-glass backdrop-blur-xl border border-border-subtle shadow-sm;
+    @apply bg-bg-glass backdrop-blur-md border border-border-subtle shadow-sm;
   }
 
   .glass-panel-elevated {
-    @apply bg-bg-glass backdrop-blur-2xl border border-border-subtle shadow-xl;
+    @apply bg-bg-glass backdrop-blur-xl border border-border-strong shadow-lg;
   }
 
-  .nebula-glow {
-    box-shadow: 0 0 40px -10px rgba(var(--brand-primary), 0.3);
+  /* Accent Glow */
+  .accent-glow {
+    box-shadow: 0 4px 12px -2px rgba(var(--brand-primary), 0.25);
   }
 
-  .nebula-text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[rgb(var(--brand-primary))] to-[rgb(var(--brand-lime))];
+  /* Warm Gradient Text */
+  .warm-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FF6D1F] via-[#FF8B50] to-[#FF6D1F];
   }
 
+  /* Glass Card with Hover */
   .glass-card-hover {
-    @apply transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl hover:border-border-strong hover:bg-bg-glass;
+    @apply transition-all duration-300 hover:scale-[1.01] hover:shadow-lg hover:border-brand-primary/30;
   }
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* Container */
+  .container-custom {
+    @apply max-w-[1400px] mx-auto px-6;
+  }
+
+  /* Section Spacing */
+  .section-spacing {
+    @apply py-12 md:py-24;
+  }
+
+  /* Hideimport os
+os.name
+ scrollbar */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
+
   .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
+  /* Mask Fade */
   .mask-linear-fade {
     mask-image: linear-gradient(to right, black 85%, transparent 100%);
   }

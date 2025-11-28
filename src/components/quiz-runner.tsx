@@ -135,22 +135,22 @@ export function QuizRunner({ category }: QuizRunnerProps) {
 
     return (
       <div className="max-w-xl mx-auto text-center space-y-8 animate-in fade-in zoom-in duration-500">
-        <GlassCard className="p-12 space-y-8 relative overflow-hidden">
+        <GlassCard className="p-12 space-y-8 relative overflow-hidden" variant="elevated">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-primary to-brand-accent" />
           
           <div className="relative">
-            <div className="w-24 h-24 bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-24 h-24 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-primary/20 shadow-lg shadow-brand-primary/10">
               <Trophy className="w-12 h-12 text-brand-primary" />
             </div>
             {percentage >= 80 && (
               <div className="absolute -top-2 -right-2 animate-bounce">
-                <Star className="w-8 h-8 text-yellow-400 fill-yellow-400 drop-shadow-lg" />
+                <Star className="w-8 h-8 text-brand-accent fill-brand-accent drop-shadow-lg" />
               </div>
             )}
           </div>
 
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Quiz Completed!</h2>
+            <h2 className="text-3xl font-bold tracking-tight font-display">Quiz Completed!</h2>
             <p className="text-text-muted text-lg">
               You scored <span className="font-bold text-brand-primary">{score}</span> out of {category.questions.length}
             </p>
@@ -158,14 +158,14 @@ export function QuizRunner({ category }: QuizRunnerProps) {
 
           <div className="flex items-center justify-center gap-2 py-4 bg-bg-soft/50 rounded-xl border border-border-subtle">
             <span className="text-sm font-medium text-text-muted">XP Earned:</span>
-            <span className="text-xl font-bold text-brand-accent-dark flex items-center gap-1">
+            <span className="text-xl font-bold text-brand-xp flex items-center gap-1">
               +{xpEarned} XP
             </span>
           </div>
 
           <div className="flex flex-col gap-3 pt-4">
             <Link href="/quizzes" className="w-full">
-              <Button className="w-full h-12 text-lg">
+              <Button className="w-full h-12 text-lg shadow-lg shadow-brand-primary/20">
                 Back to Quizzes
               </Button>
             </Link>
@@ -185,11 +185,11 @@ export function QuizRunner({ category }: QuizRunnerProps) {
       {/* Header: Progress & Timer */}
       <div className="flex items-end justify-between gap-4">
         <div className="flex-1 space-y-2">
-          <div className="flex justify-between text-xs font-medium text-text-muted uppercase tracking-wider">
+          <div className="flex justify-between text-xs font-bold text-text-muted uppercase tracking-wider">
             <span>Question {currentQuestionIndex + 1} of {category.questions.length}</span>
             <span>{category.title}</span>
           </div>
-          <div className="w-full h-2 bg-bg-soft rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-bg-soft rounded-full overflow-hidden border border-border-subtle">
             <div 
               className="h-full bg-brand-primary transition-all duration-500 ease-out"
               style={{ width: `${((currentQuestionIndex + 1) / category.questions.length) * 100}%` }}
@@ -200,22 +200,24 @@ export function QuizRunner({ category }: QuizRunnerProps) {
         {/* Timer Widget */}
         <div className={cn(
           "flex items-center gap-2 px-4 py-2 rounded-lg border font-mono font-bold transition-colors",
-          timeLeft <= 5 ? "bg-red-500/10 text-red-500 border-red-500/20 animate-pulse" : "bg-bg-elevated border-border-subtle text-text-primary"
+          timeLeft <= 5 
+            ? "bg-red-500/10 text-red-500 border-red-500/20 animate-pulse" 
+            : "bg-bg-elevated border-border-subtle text-text-primary"
         )}>
           <Timer className="w-4 h-4" />
           <span>{timeLeft}s</span>
         </div>
       </div>
 
-      <GlassCard className="p-6 md:p-10 min-h-[400px] flex flex-col justify-between relative overflow-hidden">
+      <GlassCard className="p-6 md:p-10 min-h-[400px] flex flex-col justify-between relative overflow-hidden" variant="elevated">
         <div className="space-y-8 relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+          <h2 className="text-2xl md:text-3xl font-bold leading-tight font-display">
             {currentQuestion.questionText}
           </h2>
 
           <div className="space-y-3">
             {currentQuestion.options.map((option, index) => {
-              let stateStyles = "hover:bg-bg-soft hover:border-brand-primary/30 border-border-subtle";
+              let stateStyles = "hover:bg-bg-soft hover:border-brand-primary/30 border-border-strong";
               
               if (isAnswered) {
                 if (index === currentQuestion.correctIndex) {
@@ -264,9 +266,9 @@ export function QuizRunner({ category }: QuizRunnerProps) {
               animate={{ opacity: 1, y: 0 }}
               className="pt-8 mt-8 border-t border-border-subtle"
             >
-              <div className="bg-bg-soft/50 rounded-xl p-4 mb-6 border border-border-subtle">
-                <span className="font-bold block mb-1 text-sm uppercase tracking-wider text-text-subtle">Explanation</span>
-                <p className="text-text-muted">{currentQuestion.explanation}</p>
+              <div className="bg-bg-soft/50 rounded-xl p-5 mb-6 border border-border-subtle">
+                <span className="font-bold block mb-2 text-xs uppercase tracking-wider text-brand-primary">Explanation</span>
+                <p className="text-text-muted leading-relaxed">{currentQuestion.explanation}</p>
               </div>
               <Button onClick={handleNext} size="lg" className="w-full gap-2 text-lg h-14 shadow-lg shadow-brand-primary/20">
                 {currentQuestionIndex < category.questions.length - 1 ? "Next Question" : "See Results"}

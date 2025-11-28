@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -7,7 +7,15 @@ import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { PWARegister } from "@/components/pwa-register";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+});
 
 export const metadata: Metadata = {
   title: "UxTerms | Master Product Design, UX & UI",
@@ -21,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0020EE",
+  themeColor: "#FF6D1F",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -35,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "min-h-screen flex flex-col")}>
+      <body className={cn(inter.variable, spaceGrotesk.variable, "font-sans min-h-screen flex flex-col")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
