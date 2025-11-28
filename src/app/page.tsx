@@ -5,7 +5,7 @@ import { GlassCard } from "@/components/glass-card";
 import { XPLevelWidget } from "@/components/xp-level-widget";
 import { ArrowRight, BookOpen, BrainCircuit, Trophy, Zap, Layers, Target } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const container = {
   hidden: { opacity: 0 },
@@ -23,6 +23,31 @@ const item = {
 };
 
 export default function Home() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const heroContainerMotion = shouldReduceMotion
+    ? { initial: false, animate: false, style: { opacity: 1 } }
+    : { initial: "hidden", animate: "show", variants: container };
+
+  const heroItemStyle = shouldReduceMotion ? { opacity: 1, transform: "none" } : undefined;
+
+  const featureGridMotion = shouldReduceMotion
+    ? { initial: false, whileInView: undefined, style: { opacity: 1, transform: "none" } }
+    : {
+        initial: { opacity: 0, y: 40 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6, delay: 0.2 }
+      };
+
+  const progressBarMotion = shouldReduceMotion
+    ? { initial: false, whileInView: undefined, style: { width: "62.5%" } }
+    : {
+        initial: { width: 0 },
+        whileInView: { width: "62.5%" },
+        transition: { duration: 1.5, ease: "easeOut" }
+      };
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/* Hero Section */}
@@ -30,40 +55,41 @@ export default function Home() {
         {/* Background Elements - Nebula/Aura Inspired */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full overflow-hidden pointer-events-none">
             {/* Deep Cosmic Base Gradient */}
-            <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[120px] mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }} />
+            <div
+              className={`absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[120px] mix-blend-screen ${shouldReduceMotion ? "animate-none" : "animate-pulse"}`}
+              style={{ animationDuration: "8s" }}
+            />
             <div className="absolute top-[10%] right-[-10%] w-[600px] h-[600px] bg-brand-lime/5 rounded-full blur-[100px] mix-blend-screen" />
             <div className="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[80px]" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
+          <motion.div
             className="max-w-5xl mx-auto text-center space-y-10"
-            initial="hidden"
-            animate="show"
-            variants={container}
+            {...heroContainerMotion}
           >
             {/* Eyebrow Label */}
-            <motion.div variants={item} className="flex justify-center">
+            <motion.div variants={shouldReduceMotion ? undefined : item} style={heroItemStyle} className="flex justify-center">
               <span className="px-4 py-1.5 rounded-full border border-brand-primary/20 bg-brand-primary/5 text-brand-primary text-xs font-bold uppercase tracking-widest shadow-[0_0_15px_-5px_rgba(var(--brand-primary)/0.3)] backdrop-blur-sm">
                 UX · UI · Product Design · Gamified
               </span>
             </motion.div>
 
-            <motion.div variants={item} className="flex justify-center scale-110 mb-2">
+            <motion.div variants={shouldReduceMotion ? undefined : item} style={heroItemStyle} className="flex justify-center scale-110 mb-2">
                <XPLevelWidget level={1} xp={0} nextLevelXp={100} />
             </motion.div>
-            
-            <motion.h1 variants={item} className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.05] drop-shadow-sm">
+
+            <motion.h1 variants={shouldReduceMotion ? undefined : item} style={heroItemStyle} className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.05] drop-shadow-sm">
               Level up your <br className="hidden md:block" />
               <span className="nebula-text-gradient">Design Skills</span>
               <br className="hidden md:block" /> the fun way
             </motion.h1>
-            
-            <motion.p variants={item} className="text-xl md:text-2xl text-text-muted max-w-2xl mx-auto leading-relaxed">
+
+            <motion.p variants={shouldReduceMotion ? undefined : item} style={heroItemStyle} className="text-xl md:text-2xl text-text-muted max-w-2xl mx-auto leading-relaxed">
               Master terminology, ace quizzes, and complete challenges to build your XP and portfolio.
             </motion.p>
-            
-            <motion.div variants={item} className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+
+            <motion.div variants={shouldReduceMotion ? undefined : item} style={heroItemStyle} className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/quizzes">
                 <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-brand-primary hover:bg-brand-primary/90 text-white shadow-[0_0_30px_-5px_rgba(var(--brand-primary)/0.4)] hover:shadow-[0_0_40px_-5px_rgba(var(--brand-primary)/0.6)] border border-white/10 transition-all duration-300 hover:scale-105">
                   Start Learning <ArrowRight className="ml-2 w-5 h-5" />
@@ -82,12 +108,9 @@ export default function Home() {
       {/* Features Grid */}
       <section className="py-24 relative">
         <div className="container mx-auto px-4">
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            {...featureGridMotion}
           >
             <GlassCard className="p-8 md:p-10 space-y-6 border-border-subtle hover:border-brand-primary/30 group" hoverEffect variant="elevated">
               <div className="w-14 h-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_-5px_rgba(var(--brand-primary)/0.2)]">
@@ -183,11 +206,9 @@ export default function Home() {
                         <span className="text-brand-primary">1,250 / 2,000 XP</span>
                       </div>
                       <div className="h-4 bg-bg-soft rounded-full overflow-hidden shadow-inner">
-                        <motion.div 
+                        <motion.div
                           className="h-full bg-gradient-to-r from-brand-primary to-brand-lime"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "62.5%" }}
-                          transition={{ duration: 1.5, ease: "easeOut" }}
+                          {...progressBarMotion}
                         />
                       </div>
                       <p className="text-sm text-text-muted text-center pt-2">
