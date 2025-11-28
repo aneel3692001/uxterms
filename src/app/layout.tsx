@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "UxTerms | Master Product Design, UX & UI",
   description: "The gamified learning platform for Product Design, UX, and UI Design. Master terminology, take quizzes, and complete challenges.",
-  manifest: "/manifest.webmanifest",
+  manifest: "/uxterms/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
